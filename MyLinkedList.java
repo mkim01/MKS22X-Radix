@@ -28,5 +28,32 @@ public class MyLinkedList<E>{
       data = i;
       return old;
     }
-    }
   }
+
+    private int length = 0;
+    private Node start,end;
+
+    public MyLinkedList(){
+      length = 0;
+    }
+
+    public void clear(){
+    }
+
+    public boolean add(E element){
+      if (length == 0){
+        Node n = new Node(element, start, end);
+        start.prev().setNext(n);
+        end.next().setPrev(n);
+        return true;
+      }
+      if (length >= 1){
+        Node n = new Node(element, null, end);
+        n.prev().setNext(n);
+        return true;
+      }
+      length++;
+      return true;
+    }
+
+    }
