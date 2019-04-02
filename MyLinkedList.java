@@ -38,6 +38,7 @@ public class MyLinkedList<E>{
     }
 
     public void clear(){
+
     }
 
     public boolean add(E element){
@@ -56,4 +57,22 @@ public class MyLinkedList<E>{
       return true;
     }
 
+    public void extend (MyLinkedList other){
+      if (other.size()!= 0){
+        this.end.setNext(other.start);
+        other.start.setPrev(this.end);
+        this.end = other.end;
+        other.start = null;
+        other.end = null;
+        length += other.size();
+        other.length = 0;
     }
+  }
+
+
+    // public static void radixsort(int[] data){
+    //   MyLinkedList<Integer> bucket = new MyLinkedList();
+    //
+    // }
+
+  }
