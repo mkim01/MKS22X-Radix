@@ -74,17 +74,23 @@ public class MyLinkedList<E>{
     }
 
     public void extend (MyLinkedList other){
-      if (other.size()!= 0){
+      if (other.length!= 0){
         this.end.setNext(other.start);
         other.start.setPrev(this.end);
         this.end = other.end;
         other.start = null;
         other.end = null;
-        length += other.size();
+        length += other.length;
         other.length = 0;
     }
   }
 
+    public E removeFront(){
+      start = start.next();
+      start.setPrev(null);
+      length--;
+      return start.getData();
+    }
 
     // public static void radixsort(int[] data){
     //   MyLinkedList<Integer> bucket = new MyLinkedList();
