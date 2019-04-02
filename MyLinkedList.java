@@ -37,6 +37,22 @@ public class MyLinkedList<E>{
       length = 0;
     }
 
+    public String toString(){
+      String output = "";
+      try{
+        Node current = start;
+        while (current.next() != null){
+          output += current.getData() + ", ";
+          current = current.next();
+        }
+        output += current.getData();
+        return "[" + output + "]";
+      }
+     catch (NullPointerException e){
+       return "[]";
+     }
+   }
+
     public void clear(){
 
     }
