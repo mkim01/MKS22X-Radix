@@ -4,7 +4,7 @@ public class Radix{
 public static void radixsort(int[] data){
   @SuppressWarnings("unchecked")
   MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
-
+  MyLinkedList<Integer> holder = new MyLinkedList<Integer>();
   // buckets initialization
   for (int i = 0; i < 20; i++){
     buckets[i] = new MyLinkedList<Integer>();
@@ -19,9 +19,19 @@ public static void radixsort(int[] data){
       buckets[10 + onesDigit].add(data[i]);
     }
   }
-  
-  // int max = getMax()
+  //extend to buckets so that clear up the old buckets
+  for (int i = 0; i < buckets.length; i++){
+    holder.extend(buckets[i]);
   }
+
+  // after the first iteration
+  // for(int i = 0; i < data.length; i++){
+  //   int digitindex = data[index]
+
+  }
+
+  // int max = getMax()
+
 
 
 public static int getMax(int[] data){
