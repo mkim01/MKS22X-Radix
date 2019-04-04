@@ -54,20 +54,20 @@ public class MyLinkedList<E>{
    }
 
     public void clear(){
-
+      length = 0;
+      start = null;
+      end = null;
     }
 
     public boolean add(E element){
       if (length == 0){
-        Node n = new Node(element, start, end);
-        start.prev().setNext(n);
-        end.next().setPrev(n);
-        return true;
+        start = new Node(element, null, null);
+        end = start;
       }
-      if (length >= 1){
-        Node n = new Node(element, null, end);
-        n.prev().setNext(n);
-        return true;
+      else{
+        Node current = new Node(element, null, end);
+        end.setNext(current);
+        end = current;
       }
       length++;
       return true;
@@ -86,6 +86,7 @@ public class MyLinkedList<E>{
   }
 
     public E removeFront(){
+      E val = getNth
       start = start.next();
       start.setPrev(null);
       length--;
