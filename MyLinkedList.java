@@ -30,7 +30,7 @@ public class MyLinkedList<E>{
     }
   }
 
-    private int length = 0;
+    private int length ;
     private Node start,end;
 
     public MyLinkedList(){
@@ -67,7 +67,7 @@ public class MyLinkedList<E>{
         end = start;
       }
       else{
-        Node current = new Node(element, null, end);
+        Node current = new Node(element, end, null);
         end.setNext(current);
         end = current;
       }
@@ -80,13 +80,20 @@ public class MyLinkedList<E>{
     }
 
 
-    public void extend (MyLinkedList other){
-        end.setNext(other.start);
-        length += other.size();
-        end = other.end;
-        other.start = null;
-        other.end = null;
-        other.length = 0;
+    public void extend (MyLinkedList<E> other){
+        if (other.size() != 0){
+          if(size() == 0){
+            start = other.start;
+            end = other.end;
+          }
+          else{
+            other.start.setPrev(end);
+            end.setNext(other.start);
+          }
+          end = other.end;
+          length += other.size();
+          other.clear();
+        }
     }
 
     private Node getNthNode(int N){
@@ -111,9 +118,7 @@ public class MyLinkedList<E>{
       return val;
     }
 
-    // public static void radixsort(int[] data){
-    //   MyLinkedList<Integer> bucket = new MyLinkedList();
-    //
-    // }
+    public static void main(String[] args){
+      }
 
-  }
+    }
