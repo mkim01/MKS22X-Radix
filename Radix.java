@@ -3,11 +3,23 @@ public class Radix{
 
 public static void radixsort(int[] data){
   @SuppressWarnings("unchecked")
-  MyLinkedList<Integer>[] bucket = new MyLinkedList[20];
-  for (int i = 0; i < 20; i++){
-    bucket[i] = new MyLinkedList<Integer>();
-  } // 20 buckets for negative numbers 0 - 19
+  MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
 
+  // buckets initialization
+  for (int i = 0; i < 20; i++){
+    buckets[i] = new MyLinkedList<Integer>();
+  }
+  //the first iteration of bucket -- sort the onesdigit
+  for (int i = 0; i < data.length; i++){
+    int onesDigit = data[i] % 10;
+    if(data[i] < 0){
+      buckets[9 - Math.abs(onesDigit)].add(data[i]);
+    }
+    else{
+      buckets[10 + onesDigit].add(data[i]);
+    }
+  }
+  
   // int max = getMax()
   }
 
