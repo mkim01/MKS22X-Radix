@@ -4,7 +4,7 @@ public class Radix{
 public static void radixsort(int[] data){
   @SuppressWarnings("unchecked")
   MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
-  MyLinkedList<Integer> holder = new MyLinkedList<Integer>();
+//  MyLinkedList<Integer> holder = new MyLinkedList<>();
   // buckets initialization
   for (int i = 0; i < 20; i++){
     buckets[i] = new MyLinkedList<Integer>();
@@ -19,34 +19,38 @@ public static void radixsort(int[] data){
       buckets[10 + onesDigit].add(data[i]);
     }
   }
-  //extend to buckets so that clear up the old buckets
-  for (int i = 0; i < buckets.length; i++){
-    holder.extend(buckets[i]);
+  double max = getMaxdigit(data);
+
+  for(int i = 1; i < max; i++){
+    // after the first iteration
+    for (int j = 0; j < data.length; j++){
+      int val = buckets[0].removeFront();
+      int digitindex = (val / (int) Math.pow(10,i)) % 10;
+      if (val < 0){
+        buckets[9 - Math.abs(digitindex)].add(val);
+      }
+      else{
+        buckets[10 + digitindex].add(val);
+      }
+    }
+    //extend after you assign value to bucket
+    //extend to buckets so that clear up the old buckets
+    for (int k = 0; k < buckets.length; k++){
+      buckets[0].extend(buckets[k]);
+    }
   }
 
-  int max = getMaxdigit(data);
-  // for(int i = 1; i < 20; i++){
-  //   // after the first iteration
-  //   for (j = 0; j < holder.length; j++){
-  //
-  //     int digitindex = holder[i] /
-  //     if (holder[i] < 0){
-  //       buckets[9 - Math.abs(digitindex)].add(holder[i]);
-  //     }
-  //     else{
-  //       buckets[10 + digitindex].add(holder[i]);
-  //     }
-  //   //extend after you assign value to bucket
-  //   for (int i = 0; i < buckets.length; i++){
-  //     holder.extend(buckets[i]);
-  //   }
-  // }
-
-public static int getMaxdigit(int[] data){
-  int maxvalue = 0;
+  //copying onto the data from the sorted buckets;
   for (int i = 0; i < data.length; i++){
-    if (Math.log10(Math.abs(data[i]) > maxvalue)){
-      maxvalue = (Math.log10(Math.abs(data[i]));
+    data[i] = buckets[0].removeFront();
+    }
+}
+
+public static double getMaxdigit(int[] data){
+  double maxvalue = 0;
+  for (int i = 0; i < data.length; i++){
+    if (Math.log10(Math.abs(data[i])) > maxvalue){
+      maxvalue = Math.log10(Math.abs(data[i]));
     }
   }
   return maxvalue;
